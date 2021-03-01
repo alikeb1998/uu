@@ -1,4 +1,4 @@
-import React, {FC, RefObject, useRef} from 'react';
+import React, {FC, RefObject} from 'react';
 import {useSelector} from 'react-redux';
 import styled, {createGlobalStyle} from 'styled-components';
 
@@ -20,11 +20,10 @@ const Style = createGlobalStyle<StyleProps>`
 
   html {
     background-color: ${({background}) => background};
-    overflow: hidden;
   }
 
   body, #root {
-    overflow: hidden;
+    overflow-x: hidden;
   }
 
   *::-webkit-scrollbar {

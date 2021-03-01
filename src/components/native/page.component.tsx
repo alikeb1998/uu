@@ -63,13 +63,13 @@ interface BackgroundProps {
 const Background = styled.div<BackgroundProps>`
   position: absolute;
   width: 100vw;
-  height: 200vh;
+  height: 100vh;
   z-index: -1;
   background-color: ${({background}) => background};
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: -100vh;
+	bottom: 0;
 `;
 
 interface Props {

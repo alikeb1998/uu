@@ -26,7 +26,9 @@ const Container = styled.div<ContainerProps>`
   transition: all 336ms;
   z-index: 1;
 
-  ${({shadow}) => shadow && css``}
+  ${({shadow}) => shadow && css`
+		box-shadow: 3px 0 6px 0 #00000029;
+  `}
 `;
 
 const Bar = styled.div`

@@ -61,6 +61,7 @@ interface ContentProps {
 }
 
 const Content = styled.div<ContentProps>`
+  margin: 10px 0;
   width: 800px;
   margin: auto;
   padding: 80px 20px 160px 20px;

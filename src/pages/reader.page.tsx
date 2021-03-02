@@ -27,11 +27,6 @@ const SelectStyleContainer = styled.div`
   right: 20px;
   transition: all 336ms;
   z-index: 2;
-  overflow: initial;
-
-  & * {
-    overflow: initial;
-  }
 `;
 
 const BackHomeContainer = styled.div`
@@ -40,11 +35,6 @@ const BackHomeContainer = styled.div`
   left: 20px;
   transition: all 336ms;
   z-index: 2;
-  overflow: initial;
-
-  & * {
-		overflow: initial;
-	}
 `;
 
 const ChaptersMenuContainer = styled.div`
@@ -54,37 +44,21 @@ const ChaptersMenuContainer = styled.div`
   transition: all 336ms;
   transform: translateX(-50%);
   z-index: 2;
-  overflow: initial;
-
-  & * {
-    overflow: initial;
-  }
 `;
 
 interface ContentContainerProps {
-	background: Color
+	background: Color;
+	width: number;
+	color: Color;
+	fontSize: number;
 }
 
 const ContentContainer = styled.div<ContentContainerProps>`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 80px;
-  left: 0;
-  overflow: auto !important;
+  overflow-y: scroll !important;
+  overflow-scrolling: touch;
   background: ${({background}) => background};
-`;
-
-interface ContentProps {
-	color: Color;
-	fontSize: number;
-	background: Color;
-}
-
-const Content = styled.div<ContentProps>`
-  width: 800px;
-  margin: auto;
-  padding: 80px 20px 80px 20px;
+  padding: ${({width}) => 
+					`80px ${(width - 800) / 2}px 160px ${(width - 800) / 2}px`};
   background: ${({background}) => background};
 
   & html > body * {
@@ -93,7 +67,7 @@ const Content = styled.div<ContentProps>`
   }
 
   @media only screen and (max-width: 1000px) {
-    width: 100%;
+    padding: 80px 20px;
   }
 `;
 
@@ -199,7 +173,7 @@ export const Reader = () => {
 	const [html, setHtml] = useState('');
 	const [highlights, setHighlights] = useState<Highlight[]>([]);
 
-	const {height} = useWindowSize();
+	const {width} = useWindowSize();
 
 	useEffect(() => {
 		if (!data)
@@ -259,15 +233,11 @@ export const Reader = () => {
 				{
 					isLoading ?
 						<></> :
-						<ContentContainer background={background}>
-							<Content color={foreground} fontSize={fontSize} style={{
-								minHeight: height - 80,
-							}} background={background}>
-								<Popover render={renderTextSelection(shadow, secondaryBackground, onHighlightClick())} />
-								{ReactHtmlParser(html, {
-									transform: transformImage,
-								})}
-							</Content>
+						<ContentContainer background={background} width={width} color={foreground} fontSize={fontSize}>
+							<Popover render={renderTextSelection(shadow, secondaryBackground, onHighlightClick())} />
+							{ReactHtmlParser(html, {
+								transform: transformImage,
+							})}
 						</ContentContainer>
 				}
 			</Container>

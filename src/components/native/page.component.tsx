@@ -15,8 +15,6 @@ interface StyleProps {
 const Style = createGlobalStyle<StyleProps>`
   * {
     font-family: ${({fontFamily}) => fontFamily};
-    overflow-wrap: break-word;
-		overflow: hidden;
   }
 
   html {

@@ -27,6 +27,11 @@ const SelectStyleContainer = styled.div`
   right: 20px;
   transition: all 336ms;
   z-index: 2;
+  overflow: initial;
+
+  & * {
+    overflow: initial;
+  }
 `;
 
 const BackHomeContainer = styled.div`
@@ -35,6 +40,11 @@ const BackHomeContainer = styled.div`
   left: 20px;
   transition: all 336ms;
   z-index: 2;
+  overflow: initial;
+
+  & * {
+		overflow: initial;
+	}
 `;
 
 const ChaptersMenuContainer = styled.div`
@@ -44,6 +54,11 @@ const ChaptersMenuContainer = styled.div`
   transition: all 336ms;
   transform: translateX(-50%);
   z-index: 2;
+  overflow: initial;
+
+  & * {
+    overflow: initial;
+  }
 `;
 
 interface ContentContainerProps {
@@ -56,7 +71,7 @@ const ContentContainer = styled.div<ContentContainerProps>`
   right: 0;
   bottom: 80px;
   left: 0;
-  overflow: auto;
+  overflow: auto !important;
   background: ${({background}) => background};
 `;
 

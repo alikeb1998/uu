@@ -12,8 +12,13 @@ import {RootState} from '../store';
 import {Color} from '../store/settings/types';
 import {useWindowSize} from '../hooks';
 
-const Container = styled.div`
+interface ContainerProps {
+	background: Color;
+}
+
+const Container = styled.div<ContainerProps>`
   width: 100vw;
+  background: ${({background}) => background};
 `;
 
 const SelectStyleContainer = styled.div`
@@ -42,20 +47,24 @@ const ChaptersMenuContainer = styled.div`
 `;
 
 interface ContentContainerProps {
+	background: Color
 }
 
 const ContentContainer = styled.div<ContentContainerProps>`
+  background: ${({background}) => background};
 `;
 
 interface ContentProps {
 	color: Color;
 	fontSize: number;
+	background: Color;
 }
 
 const Content = styled.div<ContentProps>`
   width: 800px;
   margin: auto;
   padding: 80px 20px 160px 20px;
+  background: ${({background}) => background};
 
   & html > body * {
     color: ${({color}) => color} !important;
@@ -162,7 +171,7 @@ export const Reader = () => {
 
 	const {
 		book: {data, currentChapter},
-		settings: {theme: {foreground, secondaryBackground, shadow}, fontSize},
+		settings: {theme: {foreground, secondaryBackground, shadow, background}, fontSize},
 	} = useSelector((state: RootState) => state);
 
 	const [isLoading, setLoading] = useState(false);
@@ -225,14 +234,14 @@ export const Reader = () => {
 			<ChaptersMenuContainer>
 				<ChaptersMenu />
 			</ChaptersMenuContainer>
-			<Container>
+			<Container background={background}>
 				{
 					isLoading ?
 						<></> :
-						<ContentContainer>
+						<ContentContainer background={background}>
 							<Content color={foreground} fontSize={fontSize} style={{
 								minHeight: height - 80,
-							}}>
+							}} background={background}>
 								<Popover render={renderTextSelection(shadow, secondaryBackground, onHighlightClick())} />
 								{ReactHtmlParser(html, {
 									transform: transformImage,

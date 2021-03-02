@@ -54,7 +54,7 @@ const ContentContainer = styled.div<ContentContainerProps>`
   position: fixed;
   top: 0;
   right: 0;
-  bottom: 0;
+  bottom: 80px;
   left: 0;
   overflow: auto;
   background: ${({background}) => background};
@@ -69,7 +69,7 @@ interface ContentProps {
 const Content = styled.div<ContentProps>`
   width: 800px;
   margin: auto;
-  padding: 80px 20px 160px 20px;
+  padding: 80px 20px 80px 20px;
   background: ${({background}) => background};
 
   & html > body * {

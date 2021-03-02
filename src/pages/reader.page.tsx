@@ -47,18 +47,23 @@ const ChaptersMenuContainer = styled.div`
 `;
 
 interface ContentContainerProps {
-	background: Color;
-	width: number;
-	color: Color;
-	fontSize: number;
+	background: Color
 }
 
 const ContentContainer = styled.div<ContentContainerProps>`
-  overflow-y: scroll !important;
-  overflow-scrolling: touch;
   background: ${({background}) => background};
-  padding: ${({width}) => 
-					`80px ${(width - 800) / 2}px 160px ${(width - 800) / 2}px`};
+`;
+
+interface ContentProps {
+	color: Color;
+	fontSize: number;
+	background: Color;
+}
+
+const Content = styled.div<ContentProps>`
+  width: 800px;
+  margin: auto;
+  padding: 80px 20px 160px 20px;
   background: ${({background}) => background};
 
   & html > body * {
@@ -67,7 +72,7 @@ const ContentContainer = styled.div<ContentContainerProps>`
   }
 
   @media only screen and (max-width: 1000px) {
-    padding: 80px 20px;
+    width: 100%;
   }
 `;
 
@@ -173,7 +178,7 @@ export const Reader = () => {
 	const [html, setHtml] = useState('');
 	const [highlights, setHighlights] = useState<Highlight[]>([]);
 
-	const {width} = useWindowSize();
+	const {height} = useWindowSize();
 
 	useEffect(() => {
 		if (!data)
@@ -233,11 +238,15 @@ export const Reader = () => {
 				{
 					isLoading ?
 						<></> :
-						<ContentContainer background={background} width={width} color={foreground} fontSize={fontSize}>
-							<Popover render={renderTextSelection(shadow, secondaryBackground, onHighlightClick())} />
-							{ReactHtmlParser(html, {
-								transform: transformImage,
-							})}
+						<ContentContainer background={background}>
+							<Content color={foreground} fontSize={fontSize} style={{
+								minHeight: height - 80,
+							}} background={background}>
+								<Popover render={renderTextSelection(shadow, secondaryBackground, onHighlightClick())} />
+								{ReactHtmlParser(html, {
+									transform: transformImage,
+								})}
+							</Content>
 						</ContentContainer>
 				}
 			</Container>
